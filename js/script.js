@@ -1,4 +1,4 @@
-// Wvwnt pada saat link di klik
+// event pada saat link di klik
 $('.page-scroll').on('click', function(e){
 
     // ambil isi href
@@ -11,14 +11,36 @@ $('.page-scroll').on('click', function(e){
     }, 800, 'easeInOutExpo');
       
     e.preventDefault();
+});;
+
+// parallax
+// about
+$(window).on('load', function() {
+    $('.pKiri').addClass('pMuncul');
+    $('.pKanan').addClass('pMuncul');
 });
-    // console.log($('body').scrollTop());
+ $(window).scroll(function() {
+    var wScroll = $(this).scrollTop();
 
-    
-    // console.log(elemenTujuan.offset().top);
-    // console.log($('body').scrollTop());
-    
-    // // pindahkan scroll
-    // $('body').scrollTop(700);
+    // jumbotron
+    $('.jumbotron img').css({
+        'transform' : 'translate(0px, '+ wScroll/4 +'%)'
+    });
 
-    // e.preventDefault();
+    $('.jumbotron h1').css({
+        'transform' : 'translate(0px, '+ wScroll/2 +'%)'
+    });
+
+    $('.jumbotron p').css({
+        'transform' : 'translate(0px, '+ wScroll/1.2 +'%)'
+    });
+
+    // portfolio
+    if(wScroll>$('.portfolio').offset().top-250){
+        $('.portfolio .thumbnail').each(function(i) {
+            setTimeout(function() {
+                $('.portfolio .thumbnail').eq(i).addClass('muncul');     
+            }, 300 * i);
+        });
+    }
+ });
